@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exception.IngredientNotFoundException;
 import org.example.model.GroceryItem;
 import org.example.repository.GroceryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class GroceryListService {
 
     public Mono<GroceryItem> updateGroceryItem(GroceryItem item) {
         return groceryRepository.findById(item.getId())
-                .switchIfEmpty(Mono.error(new Exception("Ingredient not found"))) //todo: aniko add GroceryItemNotFoundException
+                .switchIfEmpty(Mono.error(new IngredientNotFoundException())) //todo: aniko add GroceryItemNotFoundException
                 .map(oldItem -> {
                     oldItem.setName(item.getName());
                     oldItem.setCompleted(item.isCompleted());
@@ -30,12 +31,16 @@ public class GroceryListService {
                 .flatMap(groceryRepository::save);
     }
 
-    public GroceryItem findIngredientById(Long id) {
-        return groceryRepository.findById(id).block();
+    public Mono<GroceryItem> findIngredientById(Long id) {
+        return groceryRepository.findById(id);
     }
 
-    public Mono<Void> deleteGroceryItem(GroceryItem item) {
-        return groceryRepository.deleteById(item.getId())
-                .switchIfEmpty(Mono.error(new Exception("Ingredient not found")));
+    public Mono<Void> deleteGroceryItem(Long id) {
+        return groceryRepository.findById(id)
+                .switchIfEmpty(Mono.error(new IngredientNotFoundException()))
+                .flatMap(result -> {
+                            return groceryRepository.deleteById(result.getId());
+                        }
+                );
     }
 }

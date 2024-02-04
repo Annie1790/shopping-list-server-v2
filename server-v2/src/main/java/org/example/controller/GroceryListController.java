@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.exception.IngredientNotFoundException;
 import org.example.model.GroceryItem;
 import org.example.service.GroceryListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +31,17 @@ public class GroceryListController {
         service.addGroceryItem(item);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Mono<GroceryItem> updateUser(@PathVariable String id, @RequestBody GroceryItem item) {
-         final Long INGREDIENT_ID = Long.valueOf(id);
-         if (service.findIngredientById(INGREDIENT_ID) != null) {
+    public Mono<GroceryItem> updateIngredient(@RequestBody GroceryItem item) throws IngredientNotFoundException {
              return service.updateGroceryItem(item);
-         }
-         return null;
+
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteIngredientById(@PathVariable String id, @RequestBody GroceryItem item) {
-        final Long INGREDIENT_ID = Long.valueOf(id);
-        if (service.findIngredientById(INGREDIENT_ID) != null) {
-            service.deleteGroceryItem(item);
-        }
+    public Mono<Void> deleteIngredientById(@PathVariable String id) {
+        final Long ingredientId = Long.valueOf(id);
+        return service.deleteGroceryItem(ingredientId);
     }
 }
