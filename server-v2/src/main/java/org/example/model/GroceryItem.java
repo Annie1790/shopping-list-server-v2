@@ -5,13 +5,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-@Table
+@Table("grocery_list")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
 @Setter
-public class GroceryListModel {
+public class GroceryItem {
     @Id
     @NonNull
     private Long id;
@@ -21,5 +21,7 @@ public class GroceryListModel {
 
     @NonNull
     private boolean isCompleted;
+
+
 
 }

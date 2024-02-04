@@ -1,8 +1,10 @@
 package org.example.repository;
 
-import org.example.model.GroceryListModel;
+import org.example.model.GroceryItem;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-@org.springframework.stereotype.Repository
-public interface GroceryRepository extends ReactiveCrudRepository<GroceryListModel, Long> {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface GroceryRepository extends ReactiveCrudRepository<GroceryItem, Long> {
 
 }
