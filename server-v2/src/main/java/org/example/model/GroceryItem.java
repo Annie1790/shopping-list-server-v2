@@ -9,8 +9,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Getter
-@Setter
 public class GroceryItem {
     @Id
     @NonNull
