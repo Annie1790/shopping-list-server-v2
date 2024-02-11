@@ -1,8 +1,8 @@
-package org.example.controller;
+package net.igalex.grocery.controller;
 
-import org.example.exception.IngredientNotFoundException;
-import org.example.model.GroceryItem;
-import org.example.service.GroceryListService;
+import net.igalex.grocery.exception.IngredientNotFoundException;
+import net.igalex.grocery.model.GroceryItem;
+import net.igalex.grocery.service.GroceryListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +19,7 @@ public class GroceryListController {
     @Autowired
     GroceryListService service;
 
-    @GetMapping(value = "/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Flux<GroceryItem> findGroceryList() {
         return service.getGroceryList();
