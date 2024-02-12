@@ -1,4 +1,4 @@
-package org.example;
+package net.igalex.grocery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

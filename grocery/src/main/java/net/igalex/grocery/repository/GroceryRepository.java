@@ -1,6 +1,6 @@
-package org.example.repository;
+package net.igalex.grocery.repository;
 
-import org.example.model.GroceryItem;
+import net.igalex.grocery.model.GroceryItem;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 

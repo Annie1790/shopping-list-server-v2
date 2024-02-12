@@ -1,4 +1,4 @@
-package org.example.model;
+package net.igalex.grocery.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -11,15 +11,11 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 public class GroceryItem {
     @Id
-    @NonNull
     private Long id;
 
     @NonNull
     private String name;
 
     @NonNull
-    private boolean isCompleted;
-
-
-
+    private Boolean isCompleted;
 }
