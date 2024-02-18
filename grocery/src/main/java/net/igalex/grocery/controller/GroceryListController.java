@@ -33,7 +33,7 @@ public class GroceryListController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Flux<GroceryItem> findByUncompletedStatus() {return service.getGroceryListByStatus(false);}
 
-    @PostMapping("/post")
+    @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveIngredient(@RequestBody GroceryItem item) {
         service.addGroceryItem(item);
