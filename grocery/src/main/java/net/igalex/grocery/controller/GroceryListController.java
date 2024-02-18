@@ -25,6 +25,14 @@ public class GroceryListController {
         return service.getGroceryList();
     }
 
+    @GetMapping(value = "/completed", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Flux<GroceryItem> findByCompletedStatus() {return service.getGroceryListByStatus(true);}
+
+    @GetMapping(value = "/uncompleted", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Flux<GroceryItem> findByUncompletedStatus() {return service.getGroceryListByStatus(false);}
+
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveIngredient(@RequestBody GroceryItem item) {
