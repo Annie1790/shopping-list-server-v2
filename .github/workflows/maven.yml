@@ -30,7 +30,6 @@ jobs:
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        name: Maven Tests
-        path: target/surefire-reports/*.xml
+        only-summary: true
         reporter: java-junit
         fail-on-error: true
