@@ -17,8 +17,7 @@ public class GroceryListService {
 
     public void addGroceryItem(GroceryItem item) {groceryRepository.save(item).subscribe();}
 
-    //  todo: aniko finish getGroceryByStatus
-    //  public Flux<GroceryList> getGroceryByStatus(boolean status) {return groceryRepository.}
+    public Flux<GroceryItem> getGroceryListByStatus(boolean status) {return groceryRepository.findAllByStatus(status);}
 
     public Mono<GroceryItem> updateGroceryItem(GroceryItem item) {
         return groceryRepository.findById(item.getId())

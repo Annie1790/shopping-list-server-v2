@@ -74,4 +74,15 @@ public class GroceryListServiceIT {
                 .expectError(IngredientNotFoundException.class)
                 .verify();
     }
+
+    @Test
+    void getGroceryListByStatusReturnListWithCompletedStatus() {
+        //when
+        var items = service.getGroceryListByStatus(true).collectList().block();
+
+        //then
+        assertNotNull(items);
+        assertEquals(1, items.size());
+        assertTrue(items.getFirst().getIsCompleted());
+    }
 }
