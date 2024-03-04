@@ -27,7 +27,7 @@ jobs:
       run: cd grocery && mvn test
 
     - name: Run report
-      uses: dorny/test-reporter@v1
+      uses: actions/test-reporter@v1
       if: always()
       with:
         name: Maven Tests
