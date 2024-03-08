@@ -10,6 +10,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./grocery
 
     steps:
     - uses: actions/checkout@v3
@@ -21,12 +24,11 @@ jobs:
         cache: maven
         
     - name: Build with Maven
-      run: cd grocery && mvn clean install -DskipTests
+      run: mvn clean install -DskipTests
 
     - name: Run Tests
-      run: cd grocery && mvn test
+      run: mvn test
 
     - name: Surefire Report
       uses: ScaCap/action-surefire-report@v1.8.0
-      working-directory: ./grocery
 
