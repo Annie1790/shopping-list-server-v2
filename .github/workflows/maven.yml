@@ -3,11 +3,8 @@ name: Java CI with Maven
 on:
   push:
     branches: [ "main" ]
-  pull_request:
+  pull_request_target:
     branches: [ "main" ]
-
-permissions:
-  contents: write
 
 jobs:
   build:
