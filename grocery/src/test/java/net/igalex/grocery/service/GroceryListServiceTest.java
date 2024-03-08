@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 @SpringBootTest
-public class GroceryListServiceIT {
+public class GroceryListServiceTest {
     @Autowired
     GroceryListService service;
 

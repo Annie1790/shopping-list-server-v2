@@ -1,4 +1,4 @@
-package net.igalex.grocery;
+package net.igalex.grocery.config;
 
 import io.r2dbc.spi.ConnectionFactories;
 import io.r2dbc.spi.ConnectionFactory;
@@ -14,15 +14,15 @@ import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer;
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
 
 @Configuration
-@Profile("test")
-public class TestDbConfig extends AbstractR2dbcConfiguration {
+@Profile("!test")
+public class ProdDbConfig extends AbstractR2dbcConfiguration {
     @Override
     @NonNull
     @Bean
     public ConnectionFactory connectionFactory() {
         var options = ConnectionFactoryOptions.builder()
                 .option(ConnectionFactoryOptions.HOST, "192.168.1.133")
-                .option(ConnectionFactoryOptions.DATABASE, "grocery_list_test_v2")
+                .option(ConnectionFactoryOptions.DATABASE, "grocery_list_v2")
                 .option(ConnectionFactoryOptions.USER, "postgres")
                 .option(ConnectionFactoryOptions.PASSWORD, "CciLhaqEt4")
                 .option(ConnectionFactoryOptions.DRIVER, "postgresql")
@@ -36,8 +36,7 @@ public class TestDbConfig extends AbstractR2dbcConfiguration {
         initializer.setConnectionFactory(factory);
         var databasePopulator = new CompositeDatabasePopulator();
         databasePopulator.addPopulators(new ResourceDatabasePopulator(
-                new ClassPathResource("grocery_list.sql"),
-                new ClassPathResource("test_data.sql")
+                new ClassPathResource("grocery_list.sql")
         ));
         initializer.setDatabasePopulator(databasePopulator);
         return initializer;
